@@ -1,0 +1,68 @@
+# FastAPI and Web Framework
+fastapi==0.109.0
+uvicorn[standard]==0.27.0
+pydantic==2.5.3
+pydantic-settings==2.1.0
+python-multipart==0.0.6
+
+# Database
+sqlalchemy==2.0.25
+alembic==1.13.1
+
+# ML/DL Core
+numpy==1.26.3
+pandas==2.1.4
+scikit-learn==1.4.0
+scipy==1.11.4
+
+# Deep Learning
+torch==2.1.2
+transformers==4.36.2
+sentence-transformers==2.3.1
+
+# GenAI / LLM
+openai==1.10.0
+langchain==0.1.4
+langchain-openai==0.0.5
+tiktoken==0.5.2
+
+# Vector DB / RAG
+faiss-cpu==1.7.4
+chromadb==0.4.22
+
+# NLP & Text Processing
+nltk==3.8.1
+spacy==3.7.2
+textblob==0.17.1
+
+# Web Scraping & Data
+beautifulsoup4==4.12.3
+requests==2.31.0
+feedparser==6.0.11
+newspaper3k==0.2.8
+
+# Visualization
+matplotlib==3.8.2
+seaborn==0.13.1
+plotly==5.18.0
+
+# Report Generation
+reportlab==4.0.9
+markdown==3.5.2
+python-docx==1.1.0
+fpdf2==2.7.7
+
+# Utilities
+python-dotenv==1.0.0
+loguru==0.7.2
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+aiofiles==23.2.1
+httpx==0.26.0
+
+# Testing & Development
+pytest==7.4.4
+pytest-asyncio==0.23.3
+black==24.1.1
+flake8==7.0.0
+mypy==1.8.0
