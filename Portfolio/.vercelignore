@@ -1,6 +1,0 @@
-# Vercel ignore file
-# Only ignore development files
-.vscode/
-.git/
-*.log
-node_modules/
