@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexalyze AI | AI-Powered Analytics</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Particle Background -->
+    <canvas id="particles"></canvas>
+    
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <svg width="50" height="50" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#ffc9a8;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <rect x="10" y="10" width="80" height="80" rx="20" stroke="url(#logoGradient)" stroke-width="4" fill="none"/>
+                    <path d="M30 65 L30 35 L45 55 L45 35 M55 35 L55 65 L70 35 L70 65" stroke="url(#logoGradient)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                </svg>
+                <h1>Nexanalyze AI</h1>
+            </div>
+            <nav>
+                <a href="#tasks" class="nav-link active" data-tab="tasks">Tasks</a>
+                <a href="#history" class="nav-link" data-tab="history">History</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Tasks Tab -->
+            <div id="tasks" class="tab-content active">
+            <div class="hero">
+                <h2>AI-Powered Research & Automation</h2>
+                <p>Transform raw data into actionable insights with cutting-edge AI technology</p>
+            </div>                <!-- Task Type Selection -->
+                <div class="task-cards">
+                    <div class="task-card" data-task="text">
+                        <div class="task-icon">
+                            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                            </svg>
+                        </div>
+                        <h3>News Analysis</h3>
+                        <p>Analyze news sentiment, trends, and forecasts with ML models</p>
+                        <button class="btn btn-primary">Start Analysis</button>
+                    </div>
+
+                    <div class="task-card" data-task="document">
+                        <div class="task-icon">
+                            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                                <line x1="16" y1="13" x2="8" y2="13"></line>
+                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                                <polyline points="10 9 9 9 8 9"></polyline>
+                            </svg>
+                        </div>
+                        <h3>Document Processing</h3>
+                        <p>Extract insights from PDF and DOCX documents</p>
+                        <button class="btn btn-primary">Upload Document</button>
+                    </div>
+
+                    <div class="task-card" data-task="data">
+                        <div class="task-icon">
+                            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <rect x="3" y="14" width="4" height="7" stroke="url(#logoGradient)" stroke-width="2" fill="none"></rect>
+                                <rect x="10" y="4" width="4" height="17" stroke="url(#logoGradient)" stroke-width="2" fill="none"></rect>
+                                <rect x="17" y="10" width="4" height="11" stroke="url(#logoGradient)" stroke-width="2" fill="none"></rect>
+                            </svg>
+                        </div>
+                        <h3>Data Analysis</h3>
+                        <p>Analyze CSV/Excel data with statistical insights</p>
+                        <button class="btn btn-primary">Upload Data</button>
+                    </div>
+                </div>
+
+                <!-- Task Forms (Hidden by default) -->
+                <div id="taskForms" style="display: none;">
+                    <!-- Text Analysis Form -->
+                    <div id="textForm" class="task-form">
+                        <h3>News Analysis</h3>
+                        <form id="analyzeTextForm">
+                            <div class="form-group">
+                                <label for="textQuery">Search Query</label>
+                                <input type="text" id="textQuery" placeholder="e.g., Tesla, Climate Change, AI Technology" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="textInstruction">Additional Instructions (Optional)</label>
+                                <textarea id="textInstruction" rows="3" placeholder="Specific aspects to focus on..."></textarea>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-secondary" onclick="hideTaskForms()">Cancel</button>
+                                <button type="submit" class="btn btn-primary">
+                                    <span class="btn-text">Analyze</span>
+                                    <span class="btn-loader" style="display: none;">Processing...</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Document Analysis Form -->
+                    <div id="documentForm" class="task-form">
+                        <h3>Document Analysis</h3>
+                        <form id="analyzeDocForm">
+                            <div class="form-group">
+                                <label for="docFile">Upload Document (PDF/DOCX)</label>
+                                <input type="file" id="docFile" accept=".pdf,.docx,.txt" required class="file-input-styled">
+                                <div class="file-info" id="docFileInfo"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="docInstruction">Analysis Instructions (Optional)</label>
+                                <textarea id="docInstruction" rows="3" placeholder="What should I focus on?"></textarea>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-secondary" onclick="hideTaskForms()">Cancel</button>
+                                <button type="submit" class="btn btn-primary">
+                                    <span class="btn-text">Analyze Document</span>
+                                    <span class="btn-loader" style="display: none;">Processing...</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Data Analysis Form -->
+                    <div id="dataForm" class="task-form">
+                        <h3>Data Analysis</h3>
+                        <form id="analyzeDataForm">
+                            <div class="form-group">
+                                <label for="dataFile">Upload Data File (CSV/Excel)</label>
+                                <input type="file" id="dataFile" accept=".csv,.xlsx,.xls" required class="file-input-styled">
+                                <div class="file-info" id="dataFileInfo"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="dataInstruction">Analysis Goals (Optional)</label>
+                                <textarea id="dataInstruction" rows="3" placeholder="Find patterns, detect anomalies, predict trends..."></textarea>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-secondary" onclick="hideTaskForms()">Cancel</button>
+                                <button type="submit" class="btn btn-primary">
+                                    <span class="btn-text">Analyze Data</span>
+                                    <span class="btn-loader" style="display: none;">Processing...</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Task Result Display -->
+                <div id="taskResult" class="task-result" style="display: none;">
+                    <div class="result-header">
+                        <h3>Analysis Results</h3>
+                        <button class="btn btn-secondary btn-sm" onclick="hideTaskResult()">Close</button>
+                    </div>
+                    <div id="resultContent" class="result-content"></div>
+                </div>
+            </div>
+
+            <!-- History Tab -->
+            <div id="history" class="tab-content">
+                <div class="history-header">
+                    <h2>Task History</h2>
+                    <button class="btn btn-secondary" onclick="loadHistory()">
+                        <span>Refresh</span>
+                    </button>
+                </div>
+                <div id="historyContent" class="history-content">
+                    <div class="loading">Loading history...</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>Nexalyze AI - Transform Data into Insights</p>
+        </div>
+    </footer>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
