@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, FileResponse
 from contextlib import asynccontextmanager
 import os
 
@@ -55,15 +55,16 @@ app.mount("/static", StaticFiles(directory=static_path), name="static")
 # Mount reports and charts directories for downloads
 from pathlib import Path
 
-reports_dir = "./app/reports"
-charts_dir = "./app/charts"
+# Use absolute paths for Docker/production compatibility
+reports_dir = Path("./app/reports").resolve()
+charts_dir = Path("./app/charts").resolve()
 
 # Ensure directories exist
-Path(reports_dir).mkdir(parents=True, exist_ok=True)
-Path(charts_dir).mkdir(parents=True, exist_ok=True)
+reports_dir.mkdir(parents=True, exist_ok=True)
+charts_dir.mkdir(parents=True, exist_ok=True)
 
-app.mount("/reports", StaticFiles(directory=reports_dir), name="reports")
-app.mount("/charts", StaticFiles(directory=charts_dir), name="charts")
+app.mount("/reports", StaticFiles(directory=str(reports_dir)), name="reports")
+app.mount("/charts", StaticFiles(directory=str(charts_dir)), name="charts")
 
 
 # Root endpoint - Serve Web UI
@@ -73,6 +74,41 @@ async def root():
     template_path = os.path.join(os.path.dirname(__file__), "templates", "index.html")
     with open(template_path, "r", encoding="utf-8") as f:
         return f.read()
+
+
+# Download endpoints with proper headers
+@app.get("/download/report/{filename}", tags=["Downloads"])
+async def download_report(filename: str):
+    """Download report file with proper headers"""
+    file_path = reports_dir / filename
+    if file_path.exists():
+        return FileResponse(
+            path=str(file_path),
+            filename=filename,
+            media_type="application/pdf",
+            headers={
+                "Content-Disposition": f"attachment; filename={filename}",
+                "Access-Control-Allow-Origin": "*"
+            }
+        )
+    return {"error": "File not found"}
+
+
+@app.get("/download/chart/{filename}", tags=["Downloads"])
+async def download_chart(filename: str):
+    """Download chart file with proper headers"""
+    file_path = charts_dir / filename
+    if file_path.exists():
+        return FileResponse(
+            path=str(file_path),
+            filename=filename,
+            media_type="image/png",
+            headers={
+                "Content-Disposition": f"attachment; filename={filename}",
+                "Access-Control-Allow-Origin": "*"
+            }
+        )
+    return {"error": "File not found"}
 
 
 # Include routers

@@ -456,11 +456,14 @@ function displayTaskResult(task) {
                             chart.includes('sentiment') ? 'Sentiment Analysis' :
                             chart.includes('trend') ? 'Trend Forecast' : `Chart ${index + 1}`;
             
+            const chartFilename = chart.split('/').pop();
+            const chartDownloadUrl = `${window.location.protocol}//${window.location.host}/download/chart/${chartFilename}`;
+            
             html += `
                 <div style="background: rgba(15, 23, 42, 0.6); border-radius: 12px; padding: 1rem; border: 1px solid rgba(16, 185, 129, 0.2);">
                     <h5 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.1rem;">${chartName}</h5>
                     <img src="${chart}" alt="${chartName}" style="width: 100%; height: auto; border-radius: 8px; margin-bottom: 1rem; background: white; padding: 0.5rem;">
-                    <a href="${chart}" class="btn btn-secondary" download style="width: 100%; justify-content: center;">Download ${chartName}</a>
+                    <a href="${chartDownloadUrl}" class="btn btn-secondary" download="${chartFilename}" style="width: 100%; justify-content: center;">Download ${chartName}</a>
                 </div>
             `;
         });
@@ -473,10 +476,12 @@ function displayTaskResult(task) {
     
     // Downloads - show prominently for reports
     if (task.report_url) {
+        const reportFilename = task.report_url.split('/').pop();
+        const downloadUrl = `${window.location.protocol}//${window.location.host}/download/report/${reportFilename}`;
         html += `
             <div class="result-section" style="background: rgba(16, 185, 129, 0.05); border-left: 3px solid var(--primary);">
                 <h4>Full Report</h4>
-                <a href="${task.report_url}" class="btn btn-primary" download>Download Complete Report (PDF)</a>
+                <a href="${downloadUrl}" class="btn btn-primary" download="${reportFilename}">Download Complete Report (PDF)</a>
             </div>
         `;
     }
@@ -519,7 +524,7 @@ async function loadHistory() {
                     ${task.summary ? `<div class="history-item-summary">${task.summary.substring(0, 200)}${task.summary.length > 200 ? '...' : ''}</div>` : ''}
                     <div class="history-item-footer">
                         <button class="btn btn-sm btn-primary" onclick="viewTaskDetails('${task.task_id}')">View Full Details</button>
-                        ${task.report_url ? `<a href="${task.report_url}" class="btn btn-sm btn-secondary" download>Download Report</a>` : ''}
+                        ${task.report_url ? `<a href="${window.location.protocol}//${window.location.host}/download/report/${task.report_url.split('/').pop()}" class="btn btn-sm btn-secondary" download="${task.report_url.split('/').pop()}">Download Report</a>` : ''}
                     </div>
                 </div>
             `;
