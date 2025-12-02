@@ -1,0 +1,73 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.pyc
+*.pyo
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv
+
+# Environment Variables
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Git
+.git/
+.gitignore
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+pra_database.db
+
+# Logs
+logs/
+*.log
+
+# Reports and Charts
+app/reports/*.pdf
+app/charts/*.png
+
+# Uploads
+uploads/*
+
+# Model Files
+models/*.pkl
+models/*.pth
+models/*.h5
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+tests/
+
+# Data
+data/
+*.csv
+*.xlsx
+
+# Documentation
+*.md
+!README.md
+
+# Deployment configs for other platforms
+render.yaml
+runtime.txt
+
+# Examples
+examples/

@@ -222,52 +222,85 @@ GET /api/v1/tasks/?page=1&page_size=10
 
 ---
 
-## 🌐 Deployment on Render
+## 🌐 Deployment
 
-### Option 1: Deploy from GitHub (Recommended)
+### 🚀 Deploy to Koyeb (Recommended)
 
-1. **Fork/Push to GitHub**
+Koyeb provides fast, reliable deployment with generous free tier.
+
+#### Quick Deploy
+
+1. **Push to GitHub**
    ```bash
    git add .
-   git commit -m "Ready for deployment"
-   git push origin master
+   git commit -m "Deploy to Koyeb"
+   git push origin main
    ```
 
-2. **Connect to Render**
+2. **Deploy on Koyeb**
+   - Visit [Koyeb Dashboard](https://app.koyeb.com/)
+   - Click **"Create App"**
+   - Select **"GitHub"** as deployment method
+   - Choose your repository: `NexanalyzeAI--Transform-Data-Into-Insights`
+   - Branch: `main`
+
+3. **Configure Deployment**
+   - **Builder**: Docker
+   - **Dockerfile**: `Dockerfile` (auto-detected)
+   - **Port**: `8000`
+   - **Instance Type**: Free (Eco)
+
+4. **Environment Variables**
+   Click **"Add Variable"** for each:
+   - `OPENAI_API_KEY` = Your OpenAI API key
+   - `ENVIRONMENT` = `production`
+   - `DATABASE_URL` = `sqlite:///./pra_database.db`
+
+5. **Deploy**
+   - Click **"Deploy"**
+   - Wait 2-3 minutes for build
+   - Access your app at: `https://your-app-name.koyeb.app`
+
+#### Health Check
+- Visit: `https://your-app-name.koyeb.app/api/v1/health`
+- API Docs: `https://your-app-name.koyeb.app/docs`
+
+---
+
+### Alternative: Deploy to Render
+
+1. **Connect to Render**
    - Go to [Render Dashboard](https://dashboard.render.com/)
    - Click "New +" → "Web Service"
    - Connect your GitHub repository
 
-3. **Configure Service**
+2. **Configure Service**
    - **Name**: `nexalyze-ai`
    - **Environment**: `Python 3`
-   - **Build Command**: `pip install -r requirements.txt`
+   - **Build Command**: `pip install --upgrade pip && pip install -r requirements.txt`
    - **Start Command**: `uvicorn app.main:app --host 0.0.0.0 --port 10000`
-   - **Plan**: Free
 
-4. **Add Environment Variables**
+3. **Environment Variables**
    - `OPENAI_API_KEY`: Your OpenAI API key
    - `PORT`: `10000`
    - `ENVIRONMENT`: `production`
 
-5. **Deploy** - Click "Create Web Service"
+4. **Deploy** - Click "Create Web Service"
 
-### Option 2: Deploy via render.yaml
+---
 
-The project includes a `render.yaml` configuration file for automated deployment:
+### 📊 Deployment Comparison
 
-```yaml
-services:
-  - type: web
-    name: nexalyze-ai-backend
-    env: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: uvicorn app.main:app --host 0.0.0.0 --port 10000
-    plan: free
-    envVars:
-      - key: OPENAI_API_KEY
-        sync: false  # Add this manually in Render dashboard
-      - key: PORT
+| Feature | Koyeb | Render |
+|---------|-------|--------|
+| Free Tier | ✅ 512MB RAM | ✅ 512MB RAM |
+| Cold Starts | ❌ No (always on) | ⚠️ Yes (15min timeout) |
+| Build Time | ~2-3 min | ~3-5 min |
+| Docker Support | ✅ Native | ⚠️ Limited |
+| Global CDN | ✅ Yes | ✅ Yes |
+| Custom Domain | ✅ Free | ✅ Free |
+
+**Recommendation**: Use **Koyeb** for better performance and no cold starts on free tier.
         value: 10000
       - key: ENVIRONMENT
         value: production
