@@ -1,5 +1,7 @@
-// API Base URL
-const API_BASE = 'http://localhost:8000/api/v1';
+// API Base URL - Use current domain for production, localhost for development
+const API_BASE = window.location.hostname === 'localhost' 
+    ? 'http://localhost:8000/api/v1'
+    : `${window.location.protocol}//${window.location.host}/api/v1`;
 
 // State
 let currentTaskId = null;
