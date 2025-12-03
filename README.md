@@ -1,4 +1,4 @@
-﻿# Nexalyze AI - Transform Data Into Insights
+﻿# Nexanalyze AI - Transform Data Into Insights
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.109.0-009688.svg)](https://fastapi.tiangolo.com)
@@ -20,7 +20,7 @@ Nexalyze AI is a cutting-edge research and automation platform that combines the
 
 ## 🌐 Live Demo
 
-🚀 **Deployed on Render:** [https://nexalyze-ai.onrender.com](https://nexalyze-ai.onrender.com)
+🚀 **Deployed on Koyeb:** possible-kessiah-ritikworkshop-f00d1514.koyeb.app/
 
 ---
 
@@ -74,7 +74,7 @@ Nexalyze AI is a cutting-edge research and automation platform that combines the
 - **AI/ML**: OpenAI GPT, LangChain, scikit-learn, PyTorch
 - **Database**: SQLAlchemy ORM with SQLite
 - **Frontend**: HTML5, CSS3, JavaScript
-- **Deployment**: Render (Docker-compatible)
+- **Deployment**: Koyeb (Docker-compatible)
 
 ---
 
@@ -224,7 +224,7 @@ GET /api/v1/tasks/?page=1&page_size=10
 
 ## 🌐 Deployment
 
-### 🚀 Deploy to Koyeb (Recommended)
+### 🚀 Deploy to Koyeb
 
 Koyeb provides fast, reliable deployment with generous free tier.
 
@@ -238,7 +238,7 @@ Koyeb provides fast, reliable deployment with generous free tier.
    ```
 
 2. **Deploy on Koyeb**
-   - Visit [Koyeb Dashboard](https://app.koyeb.com/)
+   - Visit: possible-kessiah-ritikworkshop-f00d1514.koyeb.app/
    - Click **"Create App"**
    - Select **"GitHub"** as deployment method
    - Choose your repository: `NexanalyzeAI--Transform-Data-Into-Insights`
@@ -267,46 +267,6 @@ Koyeb provides fast, reliable deployment with generous free tier.
 
 ---
 
-### Alternative: Deploy to Render
-
-1. **Connect to Render**
-   - Go to [Render Dashboard](https://dashboard.render.com/)
-   - Click "New +" → "Web Service"
-   - Connect your GitHub repository
-
-2. **Configure Service**
-   - **Name**: `nexalyze-ai`
-   - **Environment**: `Python 3`
-   - **Build Command**: `pip install --upgrade pip && pip install -r requirements.txt`
-   - **Start Command**: `uvicorn app.main:app --host 0.0.0.0 --port 10000`
-
-3. **Environment Variables**
-   - `OPENAI_API_KEY`: Your OpenAI API key
-   - `PORT`: `10000`
-   - `ENVIRONMENT`: `production`
-
-4. **Deploy** - Click "Create Web Service"
-
----
-
-### 📊 Deployment Comparison
-
-| Feature | Koyeb | Render |
-|---------|-------|--------|
-| Free Tier | ✅ 512MB RAM | ✅ 512MB RAM |
-| Cold Starts | ❌ No (always on) | ⚠️ Yes (15min timeout) |
-| Build Time | ~2-3 min | ~3-5 min |
-| Docker Support | ✅ Native | ⚠️ Limited |
-| Global CDN | ✅ Yes | ✅ Yes |
-| Custom Domain | ✅ Free | ✅ Free |
-
-**Recommendation**: Use **Koyeb** for better performance and no cold starts on free tier.
-        value: 10000
-      - key: ENVIRONMENT
-        value: production
-```
-
----
 
 ## 📁 Project Structure
 
@@ -431,11 +391,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 For support, please open an issue on GitHub or contact through the repository.
 
----
 
-<div align="center">
-  Made with ❤️ by Ritik Gupta
-  <br><br>
-  ⭐ Star this repo if you find it helpful!
-</div>
+
+
 
